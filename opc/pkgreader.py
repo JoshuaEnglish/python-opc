@@ -34,7 +34,10 @@ class PackageReader(object):
         Return a |PackageReader| instance loaded with contents of *pkg_file*.
         """
         phys_reader = PhysPkgReader(pkg_file)
-        content_types = _ContentTypeMap.from_xml(phys_reader.content_types_xml)
+        if phys_reader.content_types_is_dir():
+            content_types = _ContentTypeMap.from_xml(phys_reader.content_types_xml_list)
+        else:
+            content_types = _ContentTypeMap.from_xml(phys_reader.content_types_xml)
         pkg_srels = PackageReader._srels_for(phys_reader, PACKAGE_URI)
         sparts = PackageReader._load_serialized_parts(phys_reader, pkg_srels,
                                                       content_types)
@@ -131,6 +134,16 @@ class _ContentTypeMap(object):
             return self._defaults[partname.ext]
         tmpl = "no content type for partname '%s' in [Content_Types].xml"
         raise KeyError(tmpl % partname)
+
+
+    @staticmethod
+    def from_xml_list(content_types_xml_list):
+        bigResult = _ContentTypeMap()
+        for c in content_types_xml_list:
+            one = _ContentTypeMap.from_xml(c)
+            bigResult._overrides = dict(bigResult._overrides.items() + one._overrides.items())
+            bigResult._defaults = dict(bigResult._defaults.items() + one._defaults.items())
+        return bigResult
 
     @staticmethod
     def from_xml(content_types_xml):
@@ -269,7 +282,10 @@ class _SerializedRelationshipCollection(object):
         """
         srels = _SerializedRelationshipCollection()
         if rels_item_xml is not None:
-            rels_elm = oxml_fromstring(rels_item_xml)
-            for rel_elm in rels_elm.Relationship:
-                srels._srels.append(_SerializedRelationship(baseURI, rel_elm))
+            try:
+                rels_elm = oxml_fromstring(rels_item_xml)
+                for rel_elm in rels_elm.Relationship:
+                    srels._srels.append(_SerializedRelationship(baseURI, rel_elm))
+            except:
+                pass
         return srels
