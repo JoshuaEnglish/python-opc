@@ -2,13 +2,17 @@
 python-opc
 ##########
 
-VERSION: 0.0.1d (first development release)
+VERSION: 0.0.2d (first development release)
 
 
-STATUS (as of October 20 2013)
+STATUS (as of October 27 2014)
 ==============================
+This is just a fork, see original: https://github.com/python-openxml/python-opc
 
-First development release. Under active development.
+Added support to read xml resources that are stored as broken pieces:
+SomeResource.xml/[0].piece
+SomeResource.xml/[1].piece
+SomeResource.xml/[2].last.piece
 
 WARNING:`spike` branch is SUBJECT TO FULL REBASING at any time. You probably
 don't want to base a pull request on it without asking first.
