@@ -323,7 +323,7 @@ class CONTENT_TYPE(object):
         'ettings+xml'
     )
     XML = (
-        'application/xml'
+        'application/vnd.ms-printing.printticket+xml'
     )
     X_EMF = (
         'image/x-emf'
@@ -336,6 +336,15 @@ class CONTENT_TYPE(object):
     )
     X_WMF = (
         'image/x-wmf'
+    )
+    MODEL = (
+        'application/vnd.ms-package.3dmanufacturing-3dmodel+xml'
+    )
+    TEXTURE = (
+        'application/vnd.ms-package.3dmanufacturing-3dmodeltexture'
+    )
+    PROP = (
+        'application/vnd.openxmlformats-package.core-properties+xml'
     )
 
 

@@ -224,7 +224,11 @@ class _Relationship(object):
         if self._is_external:
             return self._target
         else:
-            return self._target.partname.relative_ref(self._baseURI)
+            res = "%s/%s" % (self._baseURI,self._target.partname.relative_ref(self._baseURI))
+            if res[0] == '/' and res[1] == '/':
+                return res[1:]
+            return res
+            #return self._target.partname.relative_ref(self._baseURI)
 
 
 class RelationshipCollection(object):

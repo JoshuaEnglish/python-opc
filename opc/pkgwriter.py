@@ -80,7 +80,8 @@ class _ContentTypesItem(object):
         appropriate content type and suitable for storage as
         ``[Content_Types].xml`` in an OPC package.
         """
-        defaults = dict((('.rels', CT.OPC_RELATIONSHIPS), ('.xml', CT.XML)))
+        defaults = dict( ( ('.rels', CT.OPC_RELATIONSHIPS) , ('.xml', CT.XML) ,('.png', CT.PNG) ,('.model', CT.MODEL) 
+            ,('.texture', CT.TEXTURE) ,('.gif', CT.GIF) ,('.jpg', CT.JPEG), ('.prop', CT.PROP) ) )
         overrides = dict()
         for part in parts:
             _ContentTypesItem._add_content_type(
