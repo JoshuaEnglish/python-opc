@@ -134,8 +134,8 @@ class ZipPkgReader(object):
                         result.append((int(m.group(1)), data))
                 result = [x[1] for x in sorted(result,key=lambda x: x[0])]
                 rels_xml = "\n".join(result)
-            except Exception, e:
-                print e
+            except Exception as e:
+                print(e)
                 rels_xml = None
         return rels_xml
 

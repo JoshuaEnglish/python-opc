@@ -141,8 +141,8 @@ class _ContentTypeMap(object):
         bigResult = _ContentTypeMap()
         for c in content_types_xml_list:
             one = _ContentTypeMap.from_xml(c)
-            bigResult._overrides = dict(bigResult._overrides.items() + one._overrides.items())
-            bigResult._defaults = dict(bigResult._defaults.items() + one._defaults.items())
+            bigResult._overrides = dict(list(bigResult._overrides.items()) + list(one._overrides.items()))
+            bigResult._defaults = dict(list(bigResult._defaults.items()) + list(one._defaults.items()))
         return bigResult
 
     @staticmethod

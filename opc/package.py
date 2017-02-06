@@ -245,7 +245,7 @@ class RelationshipCollection(object):
         Implements access by subscript, e.g. ``rels[9]``. It also implements
         dict-style lookup of a relationship by rId, e.g. ``rels['rId1']``.
         """
-        if isinstance(key, basestring):
+        if isinstance(key, str):
             for rel in self._rels:
                 if rel.rId == key:
                     return rel
@@ -307,7 +307,7 @@ class Unmarshaller(object):
         """
         parts = Unmarshaller._unmarshal_parts(pkg_reader, part_factory)
         Unmarshaller._unmarshal_relationships(pkg_reader, pkg, parts)
-        for part in parts.values():
+        for part in list(parts.values()):
             part._after_unmarshal()
 
     @staticmethod

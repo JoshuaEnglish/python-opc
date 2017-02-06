@@ -9,4 +9,4 @@
 
 from opc.package import OpcPackage, Part, PartFactory  # noqa
 
-__version__ = '0.0.1d1'
+__version__ = '0.0.3d'
